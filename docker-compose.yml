@@ -1,0 +1,86 @@
+name: molva
+
+services:
+  postgres:
+    container_name: molva-postgres
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: otklik
+      POSTGRES_USER: otklik
+      POSTGRES_PASSWORD: otklik
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/migrations/001_init.sql:/docker-entrypoint-initdb.d/001_init.sql:ro
+      - ./backend/migrations/003_staff_workflow.sql:/docker-entrypoint-initdb.d/003_staff_workflow.sql:ro
+      - ./backend/migrations/004_questionnaire_branching.sql:/docker-entrypoint-initdb.d/004_questionnaire_branching.sql:ro
+      - ./backend/migrations/005_unified_analytics.sql:/docker-entrypoint-initdb.d/005_unified_analytics.sql:ro
+      - ./backend/migrations/006_acceptance_requirements.sql:/docker-entrypoint-initdb.d/006_acceptance_requirements.sql:ro
+      - ./backend/migrations/007_chat_safety_and_files.sql:/docker-entrypoint-initdb.d/007_chat_safety_and_files.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U otklik -d otklik"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    networks: [internal]
+
+  redis:
+    container_name: molva-redis
+    image: redis:7.4-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    networks: [internal]
+
+  api:
+    container_name: molva-api
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      args: {TARGET: otklik}
+    env_file: .env
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+    restart: unless-stopped
+    networks: [internal]
+
+  worker:
+    container_name: molva-worker
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      args: {TARGET: worker}
+    env_file: .env
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+    restart: unless-stopped
+    networks: [internal]
+
+  frontend:
+    container_name: molva
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports: ["8088:80"]
+    depends_on: [api]
+    networks: [internal]
+
+  staff-frontend:
+    container_name: molva-staff
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile.staff
+    ports: ["8089:80"]
+    depends_on: [api]
+    networks: [internal]
+
+volumes:
+  postgres_data:
+
+networks:
+  internal:
+    driver: bridge

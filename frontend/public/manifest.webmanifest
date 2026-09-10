@@ -1,0 +1,9 @@
+{
+  "name": "Молва — доверительные обращения",
+  "short_name": "Молва",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f5f1",
+  "theme_color": "#1d4f43",
+  "description": "Безопасный доступ к анонимному обращению по сохранённому коду"
+}

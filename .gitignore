@@ -1,0 +1,9 @@
+.env
+node_modules/
+dist/
+*.tsbuildinfo
+coverage/
+*.log
+.DS_Store
+tmp/
+demo-access-codes.json

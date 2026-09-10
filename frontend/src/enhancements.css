@@ -1,0 +1,56 @@
+button,.primary,.secondary{transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+button:hover:not(:disabled),.primary:hover,.secondary:hover{transform:translateY(-1px)}
+button:disabled{opacity:.48;cursor:not-allowed}
+.questionnaire-form{max-width:780px}
+.questionnaire-form h1{font-size:clamp(42px,6vw,66px)}
+.stepper{display:grid;grid-template-columns:30px 50px 30px 1fr;align-items:center;gap:8px;margin-bottom:48px;color:#777}
+.stepper span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:1px solid #c7c5bc;background:#faf9f5;font-size:12px}
+.stepper span.done{background:#254b40;color:#fff;border-color:#254b40}
+.stepper i{height:1px;background:#c7c5bc}
+.stepper b{font-size:13px;margin-left:8px;color:#496c60}
+.identity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:34px 0}
+.identity-card{position:relative;text-align:left;padding:22px 20px;min-height:120px;border:1px solid #d4d1c7;border-radius:18px;background:#fff;color:#252724;cursor:pointer}
+.identity-card span{display:block;font-size:18px;font-weight:700}
+.identity-card small{display:block;color:#6d706b;margin-top:9px;line-height:1.4}
+.identity-card i{display:none;position:absolute;right:16px;top:16px;width:23px;height:23px;border-radius:50%;background:#254b40;color:#fff;text-align:center;font-style:normal}
+.identity-card.selected{border-color:#254b40;background:#e7eee9;box-shadow:0 0 0 2px #d5e3dc}
+.identity-card.selected i{display:block}
+.next{min-width:210px}
+.question-field{border:0;padding:0;margin:42px 0}
+.question-field legend{font-size:20px;font-weight:750;margin-bottom:16px;width:100%}
+.required{font-size:11px;color:#7c6354;font-weight:500;margin-left:5px}
+.option-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.option-card{display:flex!important;align-items:center;gap:12px;padding:15px 16px;margin:0!important;border:1px solid #d6d3ca;border-radius:14px;background:#fff;cursor:pointer;min-height:55px;transition:border .15s,background .15s,box-shadow .15s}
+.option-card:hover{border-color:#819b91}
+.option-card.checked{background:#e5eee9;border-color:#365e52;box-shadow:0 0 0 1px #365e52}
+.option-card input{position:absolute;opacity:0;pointer-events:none}
+.radio-mark,.check-mark{width:21px;height:21px;display:grid;place-items:center;flex:0 0 auto;border:1.5px solid #929b95;background:#fff}
+.radio-mark{border-radius:50%}
+.checked .radio-mark{border:6px solid #254b40}
+.check-mark{border-radius:6px;color:transparent;font-size:13px}
+.checked>.check-mark{background:#254b40;border-color:#254b40;color:#fff}
+.compact{min-height:105px}
+.narrative textarea{min-height:190px}
+.email-feedback{border:1px solid #d6d3ca;border-radius:18px;background:#eef4f0;padding:22px;margin:42px 0 24px}
+.email-feedback legend{font-size:18px;font-weight:750;color:#254b40;padding:0 8px}
+.email-feedback legend span{font-size:11px;font-weight:600;color:#777b76;margin-left:6px}
+.email-feedback p{font-size:14px;line-height:1.5;color:#5f6862;margin:0 0 14px}
+.email-feedback input{background:#fff}
+.form-actions{display:flex;justify-content:space-between;gap:12px;margin-top:25px}
+.composer{display:grid;gap:10px}
+.composer textarea{min-height:120px}
+.conversation-actions{margin:22px 0}
+.finish-conversation{width:100%}
+.conversation-ended{display:flex;align-items:center;justify-content:space-between;gap:18px;background:#e7eee9;border-radius:16px;padding:20px}
+.conversation-ended p{margin:4px 0 0;color:#5e665f;font-size:13px}
+.privacy p{line-height:1.55}
+select{font:inherit;color:#252724;border:1px solid #c7c5bc;border-radius:14px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8'%3E%3Cpath d='m1 1 6 6 6-6' fill='none' stroke='%23254b40' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 16px center;padding:14px 44px 14px 15px;appearance:none;outline:none}
+select:focus{border-color:#254b40;box-shadow:0 0 0 3px #dce8e2}
+.mw select{appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23176b61' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 13px center;padding-right:38px}
+.mw input[type=checkbox]{appearance:none;width:19px;height:19px;padding:0;border-radius:5px;display:grid;place-items:center}
+.mw input[type=checkbox]:checked{background:#176b61;border-color:#176b61}
+.mw input[type=checkbox]:checked:after{content:'✓';color:#fff;font-size:12px}
+.mw input[type=number]{max-width:130px}
+.mw-editor select,.mw-editor input,.mw-editor textarea{transition:border-color .15s,box-shadow .15s}
+.mw-editor select:focus,.mw-editor input:focus,.mw-editor textarea:focus{border-color:#64a095;box-shadow:0 0 0 3px #e0efeb;outline:0}
+@media(max-width:640px){.identity-grid,.option-grid{grid-template-columns:1fr}.identity-card{min-height:95px}.stepper{margin-bottom:34px}.form-actions,.conversation-ended{flex-direction:column;align-items:stretch}}
